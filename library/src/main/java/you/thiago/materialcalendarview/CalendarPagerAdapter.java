@@ -1,14 +1,14 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView.ShowOtherDates;
-import com.prolificinteractive.materialcalendarview.format.DayFormatter;
-import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
-import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter;
+
+import you.thiago.materialcalendarview.format.DayFormatter;
+import you.thiago.materialcalendarview.format.TitleFormatter;
+import you.thiago.materialcalendarview.format.WeekDayFormatter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +29,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
   private Integer color = null;
   private Integer dateTextAppearance = null;
   private Integer weekDayTextAppearance = null;
-  @ShowOtherDates
+  @MaterialCalendarView.ShowOtherDates
   private int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
   private CalendarDay minDate = null;
   private CalendarDay maxDate = null;
@@ -217,7 +217,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     }
   }
 
-  public void setShowOtherDates(@ShowOtherDates int showFlags) {
+  public void setShowOtherDates(@MaterialCalendarView.ShowOtherDates int showFlags) {
     this.showOtherDates = showFlags;
     for (V pagerView : currentViews) {
       pagerView.setShowOtherDates(showFlags);
@@ -247,7 +247,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     }
   }
 
-  @ShowOtherDates
+  @MaterialCalendarView.ShowOtherDates
   public int getShowOtherDates() {
     return showOtherDates;
   }

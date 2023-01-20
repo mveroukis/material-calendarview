@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.spans;
+package you.thiago.materialcalendarview.spans;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

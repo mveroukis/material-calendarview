@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;

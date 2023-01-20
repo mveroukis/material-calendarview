@@ -1,9 +1,9 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.CalendarDay;
 
 /**
- * Used to format a {@linkplain com.prolificinteractive.materialcalendarview.CalendarDay} to a string for the month/year title
+ * Used to format a {@linkplain CalendarDay} to a string for the month/year title
  */
 public interface TitleFormatter {
 

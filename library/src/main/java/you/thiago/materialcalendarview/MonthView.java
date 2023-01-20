@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;

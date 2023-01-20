@@ -1,16 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
-apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
+  namespace "you.thiago.materialcalendarview"
 
+  compileSdkVersion rootProject.ext.sdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+  
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-
-    versionCode Integer.parseInt(project.VERSION_CODE)
-    versionName project.VERSION_NAME
+    targetSdkVersion rootProject.ext.sdkVersion
 
     vectorDrawables.useSupportLibrary = true
   }
@@ -20,14 +18,10 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
   }
 }
-
-group = "com.github.prolificinteractive"
-version = android.defaultConfig.versionName
-archivesBaseName = 'material-calendarview'
 
 dependencies {
   implementation rootProject.ext.threeTenAbp

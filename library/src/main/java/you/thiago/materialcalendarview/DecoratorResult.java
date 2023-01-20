@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 class DecoratorResult {
   public final DayViewDecorator decorator;

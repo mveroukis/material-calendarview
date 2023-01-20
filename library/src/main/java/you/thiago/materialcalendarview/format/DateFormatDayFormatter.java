@@ -1,7 +1,7 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
 import android.support.annotation.NonNull;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.CalendarDay;
 import java.text.DateFormat;
 import java.util.Locale;
 import org.threeten.bp.format.DateTimeFormatter;

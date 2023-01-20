@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
@@ -27,11 +27,11 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
-import com.prolificinteractive.materialcalendarview.format.DayFormatter;
-import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
-import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
-import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter;
+import you.thiago.materialcalendarview.format.ArrayWeekDayFormatter;
+import you.thiago.materialcalendarview.format.DayFormatter;
+import you.thiago.materialcalendarview.format.MonthArrayTitleFormatter;
+import you.thiago.materialcalendarview.format.TitleFormatter;
+import you.thiago.materialcalendarview.format.WeekDayFormatter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -948,24 +948,24 @@ public class MaterialCalendarView extends ViewGroup {
   }
 
   /**
-   * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.WeekDayFormatter}
+   * Set a {@linkplain WeekDayFormatter}
    * with the provided week day labels
    *
    * @param weekDayLabels Labels to use for the days of the week
-   * @see com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-   * @see #setWeekDayFormatter(com.prolificinteractive.materialcalendarview.format.WeekDayFormatter)
+   * @see ArrayWeekDayFormatter
+   * @see #setWeekDayFormatter(WeekDayFormatter)
    */
   public void setWeekDayLabels(CharSequence[] weekDayLabels) {
     setWeekDayFormatter(new ArrayWeekDayFormatter(weekDayLabels));
   }
 
   /**
-   * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.WeekDayFormatter}
+   * Set a {@linkplain WeekDayFormatter}
    * with the provided week day labels
    *
    * @param arrayRes String array resource of week day labels
-   * @see com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-   * @see #setWeekDayFormatter(com.prolificinteractive.materialcalendarview.format.WeekDayFormatter)
+   * @see ArrayWeekDayFormatter
+   * @see #setWeekDayFormatter(WeekDayFormatter)
    */
   public void setWeekDayLabels(@ArrayRes int arrayRes) {
     setWeekDayLabels(getResources().getTextArray(arrayRes));
@@ -1011,24 +1011,24 @@ public class MaterialCalendarView extends ViewGroup {
   }
 
   /**
-   * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.TitleFormatter}
+   * Set a {@linkplain TitleFormatter}
    * using the provided month labels
    *
    * @param monthLabels month labels to use
-   * @see com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
-   * @see #setTitleFormatter(com.prolificinteractive.materialcalendarview.format.TitleFormatter)
+   * @see MonthArrayTitleFormatter
+   * @see #setTitleFormatter(TitleFormatter)
    */
   public void setTitleMonths(CharSequence[] monthLabels) {
     setTitleFormatter(new MonthArrayTitleFormatter(monthLabels));
   }
 
   /**
-   * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.TitleFormatter}
+   * Set a {@linkplain TitleFormatter}
    * using the provided month labels
    *
    * @param arrayRes String array resource of month labels to use
-   * @see com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
-   * @see #setTitleFormatter(com.prolificinteractive.materialcalendarview.format.TitleFormatter)
+   * @see MonthArrayTitleFormatter
+   * @see #setTitleFormatter(TitleFormatter)
    */
   public void setTitleMonths(@ArrayRes int arrayRes) {
     setTitleMonths(getResources().getTextArray(arrayRes));

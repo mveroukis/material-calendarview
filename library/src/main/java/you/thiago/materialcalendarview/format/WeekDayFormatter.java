@@ -1,6 +1,8 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
 import org.threeten.bp.DayOfWeek;
+
+import you.thiago.materialcalendarview.MaterialCalendarView;
 
 /**
  * Supply labels for a given day of the week.
@@ -15,7 +17,7 @@ public interface WeekDayFormatter {
   CharSequence format(DayOfWeek dayOfWeek);
 
   /**
-   * Default implementation used by {@linkplain com.prolificinteractive.materialcalendarview.MaterialCalendarView}
+   * Default implementation used by {@linkplain MaterialCalendarView}
    */
   WeekDayFormatter DEFAULT = new CalendarWeekDayFormatter();
 }

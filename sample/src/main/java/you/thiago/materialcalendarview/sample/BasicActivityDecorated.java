@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -7,13 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.sample.decorators.EventDecorator;
-import com.prolificinteractive.materialcalendarview.sample.decorators.HighlightWeekendsDecorator;
-import com.prolificinteractive.materialcalendarview.sample.decorators.MySelectorDecorator;
-import com.prolificinteractive.materialcalendarview.sample.decorators.OneDayDecorator;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.sample.decorators.EventDecorator;
+import you.thiago.materialcalendarview.sample.decorators.HighlightWeekendsDecorator;
+import you.thiago.materialcalendarview.sample.decorators.MySelectorDecorator;
+import you.thiago.materialcalendarview.sample.decorators.OneDayDecorator;
+import you.thiago.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.OnDateSelectedListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;

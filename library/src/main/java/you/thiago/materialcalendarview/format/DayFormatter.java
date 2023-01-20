@@ -1,8 +1,10 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
 import android.support.annotation.NonNull;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.CalendarDay;
 import java.text.SimpleDateFormat;
+
+import you.thiago.materialcalendarview.MaterialCalendarView;
 
 /**
  * Supply labels for a given day. Default implementation is to format using a {@linkplain SimpleDateFormat}
@@ -15,7 +17,7 @@ public interface DayFormatter {
   String DEFAULT_FORMAT = "d";
 
   /**
-   * Default implementation used by {@linkplain com.prolificinteractive.materialcalendarview.MaterialCalendarView}
+   * Default implementation used by {@linkplain MaterialCalendarView}
    */
   DayFormatter DEFAULT = new DateFormatDayFormatter();
 

@@ -1,15 +1,15 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
-import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
+import you.thiago.materialcalendarview.CalendarMode;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.format.ArrayWeekDayFormatter;
+import you.thiago.materialcalendarview.format.MonthArrayTitleFormatter;
 import org.threeten.bp.DayOfWeek;
 
 public class CustomizeCodeActivity extends AppCompatActivity {

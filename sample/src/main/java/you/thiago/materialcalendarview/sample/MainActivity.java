@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.content.ComponentName;
 import android.content.Context;

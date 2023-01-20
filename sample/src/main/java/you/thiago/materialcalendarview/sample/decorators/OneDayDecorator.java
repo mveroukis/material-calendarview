@@ -1,12 +1,12 @@
-package com.prolificinteractive.materialcalendarview.sample.decorators;
+package you.thiago.materialcalendarview.sample.decorators;
 
 import android.graphics.Typeface;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.DayViewDecorator;
+import you.thiago.materialcalendarview.DayViewFacade;
+import you.thiago.materialcalendarview.MaterialCalendarView;
 import org.threeten.bp.LocalDate;
 
 /**

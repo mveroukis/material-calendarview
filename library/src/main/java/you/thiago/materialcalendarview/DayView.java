@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -19,13 +19,13 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.view.Gravity;
 import android.view.View;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView.ShowOtherDates;
-import com.prolificinteractive.materialcalendarview.format.DayFormatter;
+import you.thiago.materialcalendarview.MaterialCalendarView.ShowOtherDates;
+import you.thiago.materialcalendarview.format.DayFormatter;
 import java.util.List;
 
-import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showDecoratedDisabled;
-import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
-import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOutOfRange;
+import static you.thiago.materialcalendarview.MaterialCalendarView.showDecoratedDisabled;
+import static you.thiago.materialcalendarview.MaterialCalendarView.showOtherMonths;
+import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRange;
 
 /**
  * Display one day of a {@linkplain MaterialCalendarView}

@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView.ShowOtherDates;
-import com.prolificinteractive.materialcalendarview.format.DayFormatter;
-import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter;
+
+import you.thiago.materialcalendarview.format.DayFormatter;
+import you.thiago.materialcalendarview.format.WeekDayFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,9 +17,6 @@ import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.temporal.TemporalField;
 import org.threeten.bp.temporal.WeekFields;
-
-import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.SHOW_DEFAULTS;
-import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
 
 abstract class CalendarPagerView extends ViewGroup
     implements View.OnClickListener, View.OnLongClickListener {
@@ -31,7 +28,8 @@ abstract class CalendarPagerView extends ViewGroup
   private final ArrayList<WeekDayView> weekDayViews = new ArrayList<>();
   private final ArrayList<DecoratorResult> decoratorResults = new ArrayList<>();
   private final DayOfWeek firstDayOfWeek;
-  @ShowOtherDates protected int showOtherDates = SHOW_DEFAULTS;
+  @MaterialCalendarView.ShowOtherDates
+  protected int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
   private MaterialCalendarView mcv;
   private CalendarDay firstViewDay;
   private CalendarDay minDate = null;
@@ -89,7 +87,7 @@ abstract class CalendarPagerView extends ViewGroup
     int dow = temp.getDayOfWeek().getValue();
     int delta = getFirstDayOfWeek().getValue() - dow;
     //If the delta is positive, we want to remove a week
-    boolean removeRow = showOtherMonths(showOtherDates) ? delta >= 0 : delta > 0;
+    boolean removeRow = MaterialCalendarView.showOtherMonths(showOtherDates) ? delta >= 0 : delta > 0;
     if (removeRow) {
       delta -= DEFAULT_DAYS_IN_WEEK;
     }
@@ -124,7 +122,7 @@ abstract class CalendarPagerView extends ViewGroup
     }
   }
 
-  public void setShowOtherDates(@ShowOtherDates int showFlags) {
+  public void setShowOtherDates(@MaterialCalendarView.ShowOtherDates int showFlags) {
     this.showOtherDates = showFlags;
     updateUi();
   }

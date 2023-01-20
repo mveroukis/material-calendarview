@@ -1,7 +1,7 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
 import android.text.SpannableStringBuilder;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.CalendarDay;
 
 /**
  * Use an array to generate a month/year label

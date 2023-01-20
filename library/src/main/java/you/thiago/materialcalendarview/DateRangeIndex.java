@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 /**
  * Use math to calculate first days of months or weeks by position from a minimum date (and first

@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,11 +7,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.OnDateLongClickListener;
+import you.thiago.materialcalendarview.OnMonthChangedListener;
+import you.thiago.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.OnDateSelectedListener;
+
 import org.threeten.bp.format.DateTimeFormatter;
 
 /**

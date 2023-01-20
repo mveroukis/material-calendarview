@@ -1,24 +1,33 @@
-wrapper {
-  //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-  gradleVersion = "5.1.1"
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+project.ext {
+  buildToolsVersion = "33.0.1"
+  minSdkVersion = 15
+  sdkVersion = 33
+  versionCode = 1
+  versionName = "1.0.0"
 }
+
+wrapper {
+  // if you change this version you will need to run the 'gradlew wrapper' command twice
+  // from the command line to auto update the gradle cache
+  gradleVersion = "7.4.0"
+}
+
 buildscript {
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
+
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.3.0'
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    classpath 'com.android.tools.build:gradle:7.4.0'
   }
 }
 
 allprojects {
   repositories {
     google()
-    jcenter()
-    // Here for convenience when testing new releases
-    // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    mavenCentral()
   }
 }
 

@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
 import java.util.Locale;
 import org.threeten.bp.DayOfWeek;

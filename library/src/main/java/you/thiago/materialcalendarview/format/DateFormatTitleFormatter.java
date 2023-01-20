@@ -1,6 +1,6 @@
-package com.prolificinteractive.materialcalendarview.format;
+package you.thiago.materialcalendarview.format;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.CalendarDay;
 import org.threeten.bp.format.DateTimeFormatter;
 
 /**

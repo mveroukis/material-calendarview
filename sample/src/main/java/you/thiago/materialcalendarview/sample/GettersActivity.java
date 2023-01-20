@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.CalendarMode;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.CalendarDay;
+
 import java.util.List;
 
 /**
@@ -24,7 +25,8 @@ public class GettersActivity extends AppCompatActivity {
   public static final CharSequence[] ITEMS =
       new CharSequence[] { "NONE", "SINGLE", "MULTIPLE", "RANGE" };
 
-  @BindView(R.id.calendarView) MaterialCalendarView widget;
+  @BindView(R.id.calendarView)
+  MaterialCalendarView widget;
 
   @Override protected void onCreate(@Nullable final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

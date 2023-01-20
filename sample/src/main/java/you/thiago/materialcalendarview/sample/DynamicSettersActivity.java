@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -20,10 +20,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
+import you.thiago.materialcalendarview.CalendarMode;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.OnDateLongClickListener;
+import you.thiago.materialcalendarview.CalendarDay;
+
 import java.util.Random;
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -32,7 +33,8 @@ public class DynamicSettersActivity extends AppCompatActivity implements OnDateL
 
   private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d MMM yyyy");
 
-  @BindView(R.id.calendarView) MaterialCalendarView widget;
+  @BindView(R.id.calendarView)
+  MaterialCalendarView widget;
   @BindView(R.id.animate_mode_transition) CheckBox animateModeTransition;
   @BindView(R.id.parent) ViewGroup parent;
 

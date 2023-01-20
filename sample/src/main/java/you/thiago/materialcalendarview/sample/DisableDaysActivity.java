@@ -1,13 +1,14 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.DayViewFacade;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.CalendarDay;
+import you.thiago.materialcalendarview.DayViewDecorator;
+
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.Month;
 
@@ -16,7 +17,8 @@ import org.threeten.bp.Month;
  */
 public class DisableDaysActivity extends AppCompatActivity {
 
-  @BindView(R.id.calendarView) MaterialCalendarView widget;
+  @BindView(R.id.calendarView)
+  MaterialCalendarView widget;
 
   @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

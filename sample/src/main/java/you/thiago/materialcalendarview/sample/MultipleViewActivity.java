@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview.sample;
+package you.thiago.materialcalendarview.sample;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import you.thiago.materialcalendarview.MaterialCalendarView;
+
 import org.threeten.bp.LocalDate;
 
 /**

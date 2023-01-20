@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 /**
  * Different Calendar types available for the pager, which will give the amount of weeks visible.

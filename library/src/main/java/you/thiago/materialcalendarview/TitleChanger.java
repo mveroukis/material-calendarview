@@ -1,4 +1,4 @@
-package com.prolificinteractive.materialcalendarview;
+package you.thiago.materialcalendarview;
 
 import android.animation.Animator;
 import android.content.res.Resources;
@@ -10,7 +10,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
-import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
+import you.thiago.materialcalendarview.format.TitleFormatter;
 
 class TitleChanger {
 
