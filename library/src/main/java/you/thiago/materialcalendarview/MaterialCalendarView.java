@@ -392,8 +392,6 @@ public class MaterialCalendarView extends ViewGroup {
         ));
       } catch (Exception e) {
         e.printStackTrace();
-      } finally {
-        a.recycle();
       }
     }
 
@@ -1317,6 +1315,7 @@ public class MaterialCalendarView extends ViewGroup {
   /**
    * Sets the listener to be notified upon long clicks on dates.
    *
+   * @param longClickListener thing to be notified
    * @param longClickListener thing to be notified
    */
   public void setOnDateLongClickListener(OnDateLongClickListener longClickListener) {
