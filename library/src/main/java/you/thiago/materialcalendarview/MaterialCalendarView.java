@@ -1168,8 +1168,7 @@ public class MaterialCalendarView extends ViewGroup {
       out.writeByte((byte) (cacheCurrentPosition ? 1 : 0));
     }
 
-    public static final Parcelable.Creator<SavedState> CREATOR
-        = new Parcelable.Creator<>() {
+    public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
       public SavedState createFromParcel(Parcel in) {
         return new SavedState(in);
       }
@@ -1315,7 +1314,6 @@ public class MaterialCalendarView extends ViewGroup {
   /**
    * Sets the listener to be notified upon long clicks on dates.
    *
-   * @param longClickListener thing to be notified
    * @param longClickListener thing to be notified
    */
   public void setOnDateLongClickListener(OnDateLongClickListener longClickListener) {

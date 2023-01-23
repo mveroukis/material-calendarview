@@ -9,23 +9,17 @@ android {
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.sdkVersion
-
-    vectorDrawables.useSupportLibrary = true
   }
 
   buildTypes {
     release {
-      minifyEnabled true
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
 
   lintOptions {
     abortOnError false
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_11
-    targetCompatibility JavaVersion.VERSION_11
   }
 }
 
@@ -33,30 +27,4 @@ dependencies {
   implementation rootProject.ext.threeTenAbp
   implementation rootProject.ext.appCompat
   implementation rootProject.ext.annotations
-
-  rootProject.ext.testDep.each { testImplementation it }
-  rootProject.ext.androidTestDep.each { androidTestImplementation it }
-}
-
-tasks.withType(Javadoc) {
-  options.addStringOption('Xdoclint:none', '-quiet')
-  options.addStringOption('encoding', 'UTF-8')
-  options.addStringOption('charSet', 'UTF-8')
-}
-
-android.libraryVariants.all { variant ->
-  task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-    title "Material CalendarView ${version}"
-    description "Generates Javadoc for $variant.name."
-    source = variant.javaCompileProvider.get().source
-    doFirst {
-      classpath = files(variant.javaCompileProvider.classpath.files, project.android.getBootClasspath())
-    }
-    exclude '**/BuildConfig.java'
-    exclude '**/R.java'
-    options {
-      links "http://docs.oracle.com/javase/7/docs/api/"
-      linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
-    }
-  }
 }
