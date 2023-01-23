@@ -1,6 +1,6 @@
 package you.thiago.materialcalendarview;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import org.threeten.bp.Period;
 
 /**

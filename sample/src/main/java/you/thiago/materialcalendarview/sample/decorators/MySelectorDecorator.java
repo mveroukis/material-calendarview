@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.DayViewDecorator;
 import you.thiago.materialcalendarview.DayViewFacade;
-import com.prolificinteractive.materialcalendarview.sample.R;
+import you.thiago.materialcalendarview.sample.R;
 
 /**
  * Use a custom selector

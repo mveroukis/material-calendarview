@@ -1,8 +1,8 @@
 package you.thiago.materialcalendarview;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -47,7 +47,6 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     this.mcv = mcv;
     this.today = CalendarDay.today();
     currentViews = new ArrayDeque<>();
-    currentViews.iterator();
     setRangeDates(null, null);
   }
 
@@ -120,6 +119,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
   protected abstract DateRangeIndex createRangeIndex(CalendarDay min, CalendarDay max);
 
   @Override
+  @SuppressWarnings("unchecked")
   public int getItemPosition(@NonNull Object object) {
     if (!(isInstanceOfView(object))) {
       return POSITION_NONE;
@@ -185,6 +185,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
     V pagerView = (V) object;
     currentViews.remove(pagerView);

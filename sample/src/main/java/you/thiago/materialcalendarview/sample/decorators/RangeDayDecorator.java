@@ -6,7 +6,7 @@ import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.DayViewDecorator;
 import you.thiago.materialcalendarview.DayViewFacade;
 import you.thiago.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.sample.R;
+import you.thiago.materialcalendarview.sample.R;
 import java.util.HashSet;
 
 /**

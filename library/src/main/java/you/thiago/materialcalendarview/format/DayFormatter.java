@@ -1,6 +1,6 @@
 package you.thiago.materialcalendarview.format;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import you.thiago.materialcalendarview.CalendarDay;
 import java.text.SimpleDateFormat;
 

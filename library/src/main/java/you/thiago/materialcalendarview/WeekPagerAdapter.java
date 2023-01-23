@@ -1,6 +1,6 @@
 package you.thiago.materialcalendarview;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.temporal.ChronoUnit;

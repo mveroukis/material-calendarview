@@ -9,12 +9,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.ArrayRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.ArrayRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -62,10 +62,11 @@ import org.threeten.bp.temporal.WeekFields;
  * <p>
  * <strong>Note:</strong> if this view's size isn't divisible by 7,
  * the contents will be centered inside such that the days in the calendar are equally square.
- * For example, 600px isn't divisible by 7, so a tile size of 85 is choosen, making the calendar
+ * For example, 600px isn't divisible by 7, so a tile size of 85 is chosen, making the calendar
  * 595px wide. The extra 5px are distributed left and right to get to 600px.
  * </p>
  */
+@SuppressWarnings("unused")
 public class MaterialCalendarView extends ViewGroup {
 
   public static final int INVALID_TILE_DIMENSION = -10;
@@ -166,7 +167,7 @@ public class MaterialCalendarView extends ViewGroup {
   public static final int HORIZONTAL = 1;
 
   /**
-   * Default tile size in DIPs. This is used in cases where there is no tile size specificed and the
+   * Default tile size in DIPs. This is used in cases where there is no tile size specified and the
    * view is set to {@linkplain ViewGroup.LayoutParams#WRAP_CONTENT WRAP_CONTENT}
    */
   public static final int DEFAULT_TILE_SIZE_DP = 44;
@@ -182,7 +183,7 @@ public class MaterialCalendarView extends ViewGroup {
   private final CalendarPager pager;
   private CalendarPagerAdapter<?> adapter;
   private CalendarDay currentMonth;
-  private LinearLayout topbar;
+  private final LinearLayout topBar;
   private CalendarMode calendarMode;
   /**
    * Used for the dynamic calendar height.
@@ -190,37 +191,6 @@ public class MaterialCalendarView extends ViewGroup {
   private boolean mDynamicHeightEnabled;
 
   private final ArrayList<DayViewDecorator> dayViewDecorators = new ArrayList<>();
-
-  private final OnClickListener onClickListener = new OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      if (v == buttonFuture) {
-        pager.setCurrentItem(pager.getCurrentItem() + 1, true);
-      } else if (v == buttonPast) {
-        pager.setCurrentItem(pager.getCurrentItem() - 1, true);
-      }
-    }
-  };
-
-  private final ViewPager.OnPageChangeListener pageChangeListener =
-      new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageSelected(int position) {
-          titleChanger.setPreviousMonth(currentMonth);
-          currentMonth = adapter.getItem(position);
-          updateUi();
-
-          dispatchOnMonthChanged(currentMonth);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-      };
 
   private CalendarDay minDate = null;
   private CalendarDay maxDate = null;
@@ -261,145 +231,170 @@ public class MaterialCalendarView extends ViewGroup {
 
     final LayoutInflater inflater =
         (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-    final View content = inflater.inflate(R.layout.calendar_view, null, false);
 
-    topbar = content.findViewById(R.id.header);
+    final View content = inflater.inflate(R.layout.calendar_view, this, false);
+
+    topBar = content.findViewById(R.id.header);
     buttonPast = content.findViewById(R.id.previous);
     title = content.findViewById(R.id.month_name);
     buttonFuture = content.findViewById(R.id.next);
     pager = new CalendarPager(getContext());
+
+    OnClickListener onClickListener = v -> {
+      if (v == buttonFuture) {
+        pager.setCurrentItem(pager.getCurrentItem() + 1, true);
+      } else if (v == buttonPast) {
+        pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+      }
+    };
 
     buttonPast.setOnClickListener(onClickListener);
     buttonFuture.setOnClickListener(onClickListener);
 
     titleChanger = new TitleChanger(title);
 
-    pager.setOnPageChangeListener(pageChangeListener);
-    pager.setPageTransformer(false, new ViewPager.PageTransformer() {
+    ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
       @Override
-      public void transformPage(View page, float position) {
-        position = (float) Math.sqrt(1 - Math.abs(position));
-        page.setAlpha(position);
+      public void onPageSelected(int position) {
+        titleChanger.setPreviousMonth(currentMonth);
+        currentMonth = adapter.getItem(position);
+        updateUi();
+
+        dispatchOnMonthChanged(currentMonth);
       }
+
+      @Override
+      public void onPageScrollStateChanged(int state) {
+      }
+
+      @Override
+      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+      }
+    };
+    pager.addOnPageChangeListener(pageChangeListener);
+
+    pager.setPageTransformer(false, (page, position) -> {
+      position = (float) Math.sqrt(1 - Math.abs(position));
+      page.setAlpha(position);
     });
 
-    TypedArray a = context.getTheme()
-        .obtainStyledAttributes(attrs, R.styleable.MaterialCalendarView, 0, 0);
-    try {
-      int calendarModeIndex = a.getInteger(
-          R.styleable.MaterialCalendarView_mcv_calendarMode,
-          0
-      );
-      int firstDayOfWeekInt = a.getInteger(
-          R.styleable.MaterialCalendarView_mcv_firstDayOfWeek,
-          -1
-      );
+    try (TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MaterialCalendarView, 0, 0)) {
+      try {
+        int calendarModeIndex = a.getInteger(
+                R.styleable.MaterialCalendarView_mcv_calendarMode,
+                0
+        );
+        int firstDayOfWeekInt = a.getInteger(
+                R.styleable.MaterialCalendarView_mcv_firstDayOfWeek,
+                -1
+        );
 
-      titleChanger.setOrientation(
-          a.getInteger(
-              R.styleable.MaterialCalendarView_mcv_titleAnimationOrientation,
-              VERTICAL
-          ));
+        titleChanger.setOrientation(
+                a.getInteger(
+                        R.styleable.MaterialCalendarView_mcv_titleAnimationOrientation,
+                        VERTICAL
+                ));
 
-      if (firstDayOfWeekInt >= 1 && firstDayOfWeekInt <= 7) {
-        firstDayOfWeek = DayOfWeek.of(firstDayOfWeekInt);
-      } else {
-        firstDayOfWeek = WeekFields.of(Locale.getDefault()).getFirstDayOfWeek();
+        if (firstDayOfWeekInt >= 1 && firstDayOfWeekInt <= 7) {
+          firstDayOfWeek = DayOfWeek.of(firstDayOfWeekInt);
+        } else {
+          firstDayOfWeek = WeekFields.of(Locale.getDefault()).getFirstDayOfWeek();
+        }
+
+        showWeekDays = a.getBoolean(R.styleable.MaterialCalendarView_mcv_showWeekDays, true);
+
+        newState()
+                .setFirstDayOfWeek(firstDayOfWeek)
+                .setCalendarDisplayMode(CalendarMode.values()[calendarModeIndex])
+                .setShowWeekDays(showWeekDays)
+                .commit();
+
+        setSelectionMode(a.getInteger(
+                R.styleable.MaterialCalendarView_mcv_selectionMode,
+                SELECTION_MODE_SINGLE
+        ));
+
+        final int tileSize = a.getLayoutDimension(
+                R.styleable.MaterialCalendarView_mcv_tileSize,
+                INVALID_TILE_DIMENSION
+        );
+        if (tileSize > INVALID_TILE_DIMENSION) {
+          setTileSize(tileSize);
+        }
+
+        final int tileWidth = a.getLayoutDimension(
+                R.styleable.MaterialCalendarView_mcv_tileWidth,
+                INVALID_TILE_DIMENSION
+        );
+        if (tileWidth > INVALID_TILE_DIMENSION) {
+          setTileWidth(tileWidth);
+        }
+
+        final int tileHeight = a.getLayoutDimension(
+                R.styleable.MaterialCalendarView_mcv_tileHeight,
+                INVALID_TILE_DIMENSION
+        );
+        if (tileHeight > INVALID_TILE_DIMENSION) {
+          setTileHeight(tileHeight);
+        }
+
+        setLeftArrow(
+                a.getResourceId(
+                        R.styleable.MaterialCalendarView_mcv_leftArrow,
+                        R.drawable.mcv_action_previous
+                )
+        );
+        setRightArrow(
+                a.getResourceId(
+                        R.styleable.MaterialCalendarView_mcv_rightArrow,
+                        R.drawable.mcv_action_next
+                )
+        );
+
+        setSelectionColor(
+                a.getColor(
+                        R.styleable.MaterialCalendarView_mcv_selectionColor,
+                        getThemeAccentColor(context)
+                )
+        );
+
+        CharSequence[] array = a.getTextArray(R.styleable.MaterialCalendarView_mcv_weekDayLabels);
+        if (array != null) {
+          setWeekDayFormatter(new ArrayWeekDayFormatter(array));
+        }
+
+        array = a.getTextArray(R.styleable.MaterialCalendarView_mcv_monthLabels);
+        if (array != null) {
+          setTitleFormatter(new MonthArrayTitleFormatter(array));
+        }
+
+        setHeaderTextAppearance(a.getResourceId(
+                R.styleable.MaterialCalendarView_mcv_headerTextAppearance,
+                R.style.TextAppearance_MaterialCalendarWidget_Header
+        ));
+        setWeekDayTextAppearance(a.getResourceId(
+                R.styleable.MaterialCalendarView_mcv_weekDayTextAppearance,
+                R.style.TextAppearance_MaterialCalendarWidget_WeekDay
+        ));
+        setDateTextAppearance(a.getResourceId(
+                R.styleable.MaterialCalendarView_mcv_dateTextAppearance,
+                R.style.TextAppearance_MaterialCalendarWidget_Date
+        ));
+        //noinspection ResourceType
+        setShowOtherDates(a.getInteger(
+                R.styleable.MaterialCalendarView_mcv_showOtherDates,
+                SHOW_DEFAULTS
+        ));
+
+        setAllowClickDaysOutsideCurrentMonth(a.getBoolean(
+                R.styleable.MaterialCalendarView_mcv_allowClickDaysOutsideCurrentMonth,
+                true
+        ));
+      } catch (Exception e) {
+        e.printStackTrace();
+      } finally {
+        a.recycle();
       }
-
-      showWeekDays = a.getBoolean(R.styleable.MaterialCalendarView_mcv_showWeekDays, true);
-
-      newState()
-          .setFirstDayOfWeek(firstDayOfWeek)
-          .setCalendarDisplayMode(CalendarMode.values()[calendarModeIndex])
-          .setShowWeekDays(showWeekDays)
-          .commit();
-
-      setSelectionMode(a.getInteger(
-          R.styleable.MaterialCalendarView_mcv_selectionMode,
-          SELECTION_MODE_SINGLE
-      ));
-
-      final int tileSize = a.getLayoutDimension(
-          R.styleable.MaterialCalendarView_mcv_tileSize,
-          INVALID_TILE_DIMENSION
-      );
-      if (tileSize > INVALID_TILE_DIMENSION) {
-        setTileSize(tileSize);
-      }
-
-      final int tileWidth = a.getLayoutDimension(
-          R.styleable.MaterialCalendarView_mcv_tileWidth,
-          INVALID_TILE_DIMENSION
-      );
-      if (tileWidth > INVALID_TILE_DIMENSION) {
-        setTileWidth(tileWidth);
-      }
-
-      final int tileHeight = a.getLayoutDimension(
-          R.styleable.MaterialCalendarView_mcv_tileHeight,
-          INVALID_TILE_DIMENSION
-      );
-      if (tileHeight > INVALID_TILE_DIMENSION) {
-        setTileHeight(tileHeight);
-      }
-
-      setLeftArrow(
-          a.getResourceId(
-              R.styleable.MaterialCalendarView_mcv_leftArrow,
-              R.drawable.mcv_action_previous
-          )
-      );
-      setRightArrow(
-          a.getResourceId(
-              R.styleable.MaterialCalendarView_mcv_rightArrow,
-              R.drawable.mcv_action_next
-          )
-      );
-
-      setSelectionColor(
-          a.getColor(
-              R.styleable.MaterialCalendarView_mcv_selectionColor,
-              getThemeAccentColor(context)
-          )
-      );
-
-      CharSequence[] array = a.getTextArray(R.styleable.MaterialCalendarView_mcv_weekDayLabels);
-      if (array != null) {
-        setWeekDayFormatter(new ArrayWeekDayFormatter(array));
-      }
-
-      array = a.getTextArray(R.styleable.MaterialCalendarView_mcv_monthLabels);
-      if (array != null) {
-        setTitleFormatter(new MonthArrayTitleFormatter(array));
-      }
-
-      setHeaderTextAppearance(a.getResourceId(
-          R.styleable.MaterialCalendarView_mcv_headerTextAppearance,
-          R.style.TextAppearance_MaterialCalendarWidget_Header
-      ));
-      setWeekDayTextAppearance(a.getResourceId(
-          R.styleable.MaterialCalendarView_mcv_weekDayTextAppearance,
-          R.style.TextAppearance_MaterialCalendarWidget_WeekDay
-      ));
-      setDateTextAppearance(a.getResourceId(
-          R.styleable.MaterialCalendarView_mcv_dateTextAppearance,
-          R.style.TextAppearance_MaterialCalendarWidget_Date
-      ));
-      //noinspection ResourceType
-      setShowOtherDates(a.getInteger(
-          R.styleable.MaterialCalendarView_mcv_showOtherDates,
-          SHOW_DEFAULTS
-      ));
-
-      setAllowClickDaysOutsideCurrentMonth(a.getBoolean(
-          R.styleable.MaterialCalendarView_mcv_allowClickDaysOutsideCurrentMonth,
-          true
-      ));
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      a.recycle();
     }
 
     // Adapter is created while parsing the TypedArray attrs, so setup has to happen after
@@ -420,7 +415,7 @@ public class MaterialCalendarView extends ViewGroup {
   }
 
   private void setupChildren() {
-    addView(topbar);
+    addView(topBar);
 
     pager.setId(R.id.mcv_pager);
     pager.setOffscreenPageLimit(1);
@@ -531,7 +526,7 @@ public class MaterialCalendarView extends ViewGroup {
   /**
    * Set the size of each tile that makes up the calendar.
    * Each day is 1 tile, so the widget is 7 tiles wide and 7 or 8 tiles tall
-   * depending on the visibility of the {@link #topbar}.
+   * depending on the visibility of the {@link #topBar}.
    *
    * @param size the new size for each tile in pixels
    */
@@ -627,6 +622,7 @@ public class MaterialCalendarView extends ViewGroup {
    * Pass all touch events to the pager so scrolling works on the edges of the calendar view.
    */
   @Override
+  @SuppressLint("ClickableViewAccessibility")
   public boolean onTouchEvent(MotionEvent event) {
     return pager.dispatchTouchEvent(event);
   }
@@ -1055,22 +1051,22 @@ public class MaterialCalendarView extends ViewGroup {
   }
 
   /**
-   * Sets the visibility {@link #topbar}, which contains
+   * Sets the visibility {@link #topBar}, which contains
    * the previous month button {@link #buttonPast}, next month button {@link #buttonFuture},
    * and the month title {@link #title}.
    *
-   * @param visible Boolean indicating if the topbar is visible
+   * @param visible Boolean indicating if the topBar is visible
    */
   public void setTopbarVisible(boolean visible) {
-    topbar.setVisibility(visible ? View.VISIBLE : View.GONE);
+    topBar.setVisibility(visible ? View.VISIBLE : View.GONE);
     requestLayout();
   }
 
   /**
-   * @return true if the topbar is visible
+   * @return true if the topBar is visible
    */
   public boolean getTopbarVisible() {
-    return topbar.getVisibility() == View.VISIBLE;
+    return topBar.getVisibility() == View.VISIBLE;
   }
 
   /**
@@ -1175,7 +1171,7 @@ public class MaterialCalendarView extends ViewGroup {
     }
 
     public static final Parcelable.Creator<SavedState> CREATOR
-        = new Parcelable.Creator<SavedState>() {
+        = new Parcelable.Creator<>() {
       public SavedState createFromParcel(Parcel in) {
         return new SavedState(in);
       }
@@ -1203,15 +1199,16 @@ public class MaterialCalendarView extends ViewGroup {
 
   private static int getThemeAccentColor(Context context) {
     int colorAttr;
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       colorAttr = android.R.attr.colorAccent;
     } else {
-      //Get colorAccent defined for AppCompat
-      colorAttr =
-          context.getResources().getIdentifier("colorAccent", "attr", context.getPackageName());
+      colorAttr = R.attr.colorAccent;
     }
+
     TypedValue outValue = new TypedValue();
     context.getTheme().resolveAttribute(colorAttr, outValue, true);
+
     return outValue.data;
   }
 
@@ -1439,6 +1436,8 @@ public class MaterialCalendarView extends ViewGroup {
         dispatchOnDateSelected(date, true);
       }
       break;
+      case SELECTION_MODE_NONE:
+        break;
     }
   }
 
@@ -1449,14 +1448,14 @@ public class MaterialCalendarView extends ViewGroup {
    * @param lastDay last day of the range to select
    */
   public void selectRange(final CalendarDay firstDay, final CalendarDay lastDay) {
-    if (firstDay == null || lastDay == null) {
-      return;
-    } else if (firstDay.isAfter(lastDay)) {
-      adapter.selectRange(lastDay, firstDay);
-      dispatchOnRangeSelected(adapter.getSelectedDates());
-    } else {
-      adapter.selectRange(firstDay, lastDay);
-      dispatchOnRangeSelected(adapter.getSelectedDates());
+    if (firstDay != null && lastDay != null) {
+      if (firstDay.isAfter(lastDay)) {
+        adapter.selectRange(lastDay, firstDay);
+        dispatchOnRangeSelected(adapter.getSelectedDates());
+      } else {
+        adapter.selectRange(firstDay, lastDay);
+        dispatchOnRangeSelected(adapter.getSelectedDates());
+      }
     }
   }
 
@@ -1596,7 +1595,7 @@ public class MaterialCalendarView extends ViewGroup {
       //Use measureTileSize if set
       measureTileHeight = measureTileSize;
       measureTileWidth = measureTileSize;
-    } else if (measureTileSize <= 0) {
+    } else {
       if (measureTileWidth <= 0) {
         //Set width to default if no value were set
         measureTileWidth = dpToPx(DEFAULT_TILE_SIZE_DP);
@@ -1855,7 +1854,7 @@ public class MaterialCalendarView extends ViewGroup {
 
     /**
      * Set calendar display mode. The default mode is Months.
-     * When switching between modes will select todays date, or the selected date,
+     * When switching between modes will select today's date, or the selected date,
      * if selection mode is single.
      *
      * @param mode - calendar mode
