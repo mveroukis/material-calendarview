@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import you.thiago.materialcalendarview.MaterialCalendarView;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
 /**
  * In response to the issue comment at

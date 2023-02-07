@@ -1,5 +1,6 @@
 package you.thiago.materialcalendarview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,24 +45,25 @@ class CalendarPager extends ViewPager {
   }
 
   @Override
+  @SuppressLint("ClickableViewAccessibility")
   public boolean onTouchEvent(MotionEvent ev) {
     return pagingEnabled && super.onTouchEvent(ev);
   }
 
   @Override
   public boolean canScrollVertically(int direction) {
-    /**
-     * disables scrolling vertically when paging disabled, fixes scrolling
-     * for nested {@link ViewPager}
+    /*
+      disables scrolling vertically when paging disabled, fixes scrolling
+      for nested {@link ViewPager}
      */
     return pagingEnabled && super.canScrollVertically(direction);
   }
 
   @Override
   public boolean canScrollHorizontally(int direction) {
-    /**
-     * disables scrolling horizontally when paging disabled, fixes scrolling
-     * for nested {@link ViewPager}
+    /*
+      disables scrolling horizontally when paging disabled, fixes scrolling
+      for nested {@link ViewPager}
      */
     return pagingEnabled && super.canScrollHorizontally(direction);
   }

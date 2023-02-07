@@ -1,6 +1,6 @@
 package you.thiago.materialcalendarview.format;
 
-import org.threeten.bp.DayOfWeek;
+import java.time.DayOfWeek;
 
 import you.thiago.materialcalendarview.MaterialCalendarView;
 

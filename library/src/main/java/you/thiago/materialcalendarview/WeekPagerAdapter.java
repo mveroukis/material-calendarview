@@ -1,10 +1,11 @@
 package you.thiago.materialcalendarview;
 
 import androidx.annotation.NonNull;
-import org.threeten.bp.DayOfWeek;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.temporal.ChronoUnit;
-import org.threeten.bp.temporal.WeekFields;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.WeekFields;
 
 public class WeekPagerAdapter extends CalendarPagerAdapter<WeekView> {
 

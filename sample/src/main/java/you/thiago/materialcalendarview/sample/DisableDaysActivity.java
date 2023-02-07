@@ -9,8 +9,8 @@ import you.thiago.materialcalendarview.MaterialCalendarView;
 import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.DayViewDecorator;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.Month;
+import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * Show off setting min and max dates and disabling individual days

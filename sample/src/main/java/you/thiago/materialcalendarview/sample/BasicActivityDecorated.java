@@ -18,8 +18,8 @@ import you.thiago.materialcalendarview.OnDateSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.Month;
+import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * Shows off the most basic usage

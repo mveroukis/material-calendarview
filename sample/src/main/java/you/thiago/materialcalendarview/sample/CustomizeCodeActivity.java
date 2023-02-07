@@ -10,7 +10,7 @@ import you.thiago.materialcalendarview.MaterialCalendarView;
 import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.format.ArrayWeekDayFormatter;
 import you.thiago.materialcalendarview.format.MonthArrayTitleFormatter;
-import org.threeten.bp.DayOfWeek;
+import java.time.DayOfWeek;
 
 public class CustomizeCodeActivity extends AppCompatActivity {
 

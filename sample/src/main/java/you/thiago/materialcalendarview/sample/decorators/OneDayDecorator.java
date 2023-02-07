@@ -7,7 +7,7 @@ import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.DayViewDecorator;
 import you.thiago.materialcalendarview.DayViewFacade;
 import you.thiago.materialcalendarview.MaterialCalendarView;
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
 /**
  * Decorate a day by making the text big and bold

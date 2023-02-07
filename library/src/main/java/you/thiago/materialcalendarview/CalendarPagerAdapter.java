@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import you.thiago.materialcalendarview.format.DayFormatter;
 import you.thiago.materialcalendarview.format.TitleFormatter;
 import you.thiago.materialcalendarview.format.WeekDayFormatter;
+
+import java.time.LocalDate;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.threeten.bp.LocalDate;
 
 /**
  * Pager adapter backing the calendar view

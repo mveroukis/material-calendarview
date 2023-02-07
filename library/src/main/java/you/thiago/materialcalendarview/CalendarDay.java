@@ -4,7 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import org.threeten.bp.LocalDate;
+
+import java.time.LocalDate;
 
 /**
  * An imputable representation of a day on a calendar, based on {@link LocalDate}.
@@ -148,6 +149,7 @@ public final class CalendarDay implements Parcelable {
     return (year * 10000) + (month * 100) + day;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "CalendarDay{" + date.getYear() + "-" + date.getMonthValue() + "-"
@@ -174,7 +176,7 @@ public final class CalendarDay implements Parcelable {
     dest.writeInt(date.getDayOfMonth());
   }
 
-  public static final Creator<CalendarDay> CREATOR = new Creator<CalendarDay>() {
+  public static final Creator<CalendarDay> CREATOR = new Creator<>() {
     public CalendarDay createFromParcel(Parcel in) {
       return new CalendarDay(in);
     }

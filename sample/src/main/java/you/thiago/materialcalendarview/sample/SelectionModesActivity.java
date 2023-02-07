@@ -18,7 +18,7 @@ import you.thiago.materialcalendarview.OnDateSelectedListener;
 import you.thiago.materialcalendarview.OnRangeSelectedListener;
 
 import java.util.List;
-import org.threeten.bp.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 /**
  * An activity that demonstrate the multiple selection mode that the calendar offers.

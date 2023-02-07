@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import you.thiago.materialcalendarview.CalendarDay;
 import java.text.DateFormat;
 import java.util.Locale;
-import org.threeten.bp.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Format using a {@linkplain DateFormat} instance.

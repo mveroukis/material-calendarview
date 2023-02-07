@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import android.view.Gravity;
 import you.thiago.materialcalendarview.format.WeekDayFormatter;
-import org.threeten.bp.DayOfWeek;
+import java.time.DayOfWeek;
 
 /**
  * Display a day of the week

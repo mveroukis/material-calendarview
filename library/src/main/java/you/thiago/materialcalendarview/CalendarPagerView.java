@@ -1,22 +1,23 @@
 package you.thiago.materialcalendarview;
 
-import android.os.Build;
-import androidx.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import you.thiago.materialcalendarview.format.DayFormatter;
-import you.thiago.materialcalendarview.format.WeekDayFormatter;
+import androidx.annotation.NonNull;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.threeten.bp.DayOfWeek;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.temporal.TemporalField;
-import org.threeten.bp.temporal.WeekFields;
+
+import you.thiago.materialcalendarview.format.DayFormatter;
+import you.thiago.materialcalendarview.format.WeekDayFormatter;
 
 abstract class CalendarPagerView extends ViewGroup
     implements View.OnClickListener, View.OnLongClickListener {
@@ -30,8 +31,8 @@ abstract class CalendarPagerView extends ViewGroup
   private final DayOfWeek firstDayOfWeek;
   @MaterialCalendarView.ShowOtherDates
   protected int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
-  private MaterialCalendarView mcv;
-  private CalendarDay firstViewDay;
+  private final MaterialCalendarView mcv;
+  private final CalendarDay firstViewDay;
   private CalendarDay minDate = null;
   private CalendarDay maxDate = null;
   protected boolean showWeekDays;
@@ -63,9 +64,7 @@ abstract class CalendarPagerView extends ViewGroup
     LocalDate local = calendar;
     for (int i = 0; i < DEFAULT_DAYS_IN_WEEK; i++) {
       WeekDayView weekDayView = new WeekDayView(getContext(), local.getDayOfWeek());
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-        weekDayView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-      }
+      weekDayView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
       weekDayViews.add(weekDayView);
       addView(weekDayView);
       local = local.plusDays(1);
@@ -281,11 +280,10 @@ abstract class CalendarPagerView extends ViewGroup
     final int parentWidth = getWidth();
     final int count = getChildCount();
     final int parentLeft = 0;
-    final int parentRight = parentWidth;
 
     int childTop = 0;
     int childLeft = parentLeft;
-    int childRight = parentRight;
+    int childRight = parentWidth;
 
     for (int i = 0; i < count; i++) {
       final View child = getChildAt(i);
@@ -304,7 +302,7 @@ abstract class CalendarPagerView extends ViewGroup
       //We should warp every so many children
       if (i % DEFAULT_DAYS_IN_WEEK == (DEFAULT_DAYS_IN_WEEK - 1)) {
         childLeft = parentLeft;
-        childRight = parentRight;
+        childRight = parentWidth;
         childTop += height;
       }
     }

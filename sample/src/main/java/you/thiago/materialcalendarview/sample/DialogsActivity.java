@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import you.thiago.materialcalendarview.MaterialCalendarView;
 import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.OnDateSelectedListener;
-import org.threeten.bp.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Shows off the most basic usage

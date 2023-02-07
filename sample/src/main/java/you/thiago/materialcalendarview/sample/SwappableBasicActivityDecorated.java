@@ -14,8 +14,8 @@ import you.thiago.materialcalendarview.sample.decorators.OneDayDecorator;
 import you.thiago.materialcalendarview.CalendarDay;
 import you.thiago.materialcalendarview.OnDateSelectedListener;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.Month;
+import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * Shows off the most basic usage

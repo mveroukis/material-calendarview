@@ -7,6 +7,9 @@ android {
   buildToolsVersion rootProject.ext.buildToolsVersion
   
   defaultConfig {
+    // Required when setting minSdkVersion to 20 or lower
+    multiDexEnabled true
+
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.sdkVersion
   }
@@ -18,13 +21,24 @@ android {
     }
   }
 
+  compileOptions {
+    // Required flag to enable support for JSR-310 and other APIs
+    coreLibraryDesugaringEnabled true
+
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
+  }
+
   lintOptions {
     abortOnError false
   }
 }
 
 dependencies {
-  implementation rootProject.ext.threeTenAbp
+  coreLibraryDesugaring rootProject.ext.coreDesugar
+
   implementation rootProject.ext.appCompat
   implementation rootProject.ext.annotations
+
+  testImplementation rootProject.ext.junit
 }

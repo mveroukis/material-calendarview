@@ -9,10 +9,15 @@ ext {
   appCompat = 'androidx.appcompat:appcompat:1.0.0'
   recyclerviewV7 = 'androidx.recyclerview:recyclerview:1.0.0'
 
+  coreDesugarVersion = '2.0.2'
   butterKnifeVersion = '10.2.0'
+  junitVersion = '4.11'
 
   // Other
-  threeTenAbp = 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+  coreDesugar = "com.android.tools:desugar_jdk_libs:$coreDesugarVersion"
   butterknife = "com.jakewharton:butterknife:$butterKnifeVersion"
   butterknifeCompiler = "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+  // Test
+  junit = "junit:junit:$junitVersion"
 }

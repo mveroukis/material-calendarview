@@ -1,7 +1,7 @@
 package you.thiago.materialcalendarview.format;
 
 import you.thiago.materialcalendarview.CalendarDay;
-import org.threeten.bp.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Format using a {@linkplain java.text.DateFormat} instance.

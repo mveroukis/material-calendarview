@@ -26,8 +26,8 @@ import you.thiago.materialcalendarview.OnDateLongClickListener;
 import you.thiago.materialcalendarview.CalendarDay;
 
 import java.util.Random;
-import org.threeten.bp.DayOfWeek;
-import org.threeten.bp.format.DateTimeFormatter;
+import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
 
 public class DynamicSettersActivity extends AppCompatActivity implements OnDateLongClickListener {
 

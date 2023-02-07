@@ -203,10 +203,10 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
 
   private void regenerateBackground() {
     if (selectionDrawable != null) {
-      setBackgroundDrawable(selectionDrawable);
+      setBackground(selectionDrawable);
     } else {
       mCircleDrawable = generateBackground(selectionColor, fadeTime, circleDrawableRect);
-      setBackgroundDrawable(mCircleDrawable);
+      setBackground(mCircleDrawable);
     }
   }
 
