@@ -396,10 +396,6 @@ public class MaterialCalendarView extends ViewGroup {
       e.printStackTrace();
     } finally {
       a.recycle();
-
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        a.close();
-      }
     }
 
     // Adapter is created while parsing the TypedArray attrs, so setup has to happen after
