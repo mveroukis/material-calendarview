@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.style.LineBackgroundSpan;
 
+import androidx.annotation.NonNull;
+
 /**
  * Span to draw a dot centered under a section of text
  */
@@ -64,10 +66,10 @@ public class DotSpan implements LineBackgroundSpan {
 
   @Override
   public void drawBackground(
-      Canvas canvas, Paint paint,
-      int left, int right, int top, int baseline, int bottom,
-      CharSequence charSequence,
-      int start, int end, int lineNum
+          @NonNull Canvas canvas, Paint paint,
+          int left, int right, int top, int baseline, int bottom,
+          @NonNull CharSequence charSequence,
+          int start, int end, int lineNum
   ) {
     int oldColor = paint.getColor();
     if (color != 0) {

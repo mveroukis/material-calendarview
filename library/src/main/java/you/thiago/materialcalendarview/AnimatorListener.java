@@ -2,20 +2,22 @@ package you.thiago.materialcalendarview;
 
 import android.animation.Animator;
 
+import androidx.annotation.NonNull;
+
 class AnimatorListener implements Animator.AnimatorListener {
   @Override
-  public void onAnimationStart(Animator animator) {
+  public void onAnimationStart(@NonNull Animator animator) {
   }
 
   @Override
-  public void onAnimationEnd(Animator animator) {
+  public void onAnimationEnd(@NonNull Animator animator) {
   }
 
   @Override
-  public void onAnimationCancel(Animator animator) {
+  public void onAnimationCancel(@NonNull Animator animator) {
   }
 
   @Override
-  public void onAnimationRepeat(Animator animator) {
+  public void onAnimationRepeat(@NonNull Animator animator) {
   }
 }

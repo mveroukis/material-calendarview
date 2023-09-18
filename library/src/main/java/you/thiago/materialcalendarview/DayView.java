@@ -1,7 +1,6 @@
 package you.thiago.materialcalendarview;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
@@ -12,16 +11,18 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatCheckedTextView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.view.Gravity;
 import android.view.View;
+
+import java.util.List;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
 import you.thiago.materialcalendarview.MaterialCalendarView.ShowOtherDates;
 import you.thiago.materialcalendarview.format.DayFormatter;
-import java.util.List;
 
 import static you.thiago.materialcalendarview.MaterialCalendarView.showDecoratedDisabled;
 import static you.thiago.materialcalendarview.MaterialCalendarView.showOtherMonths;
@@ -57,9 +58,7 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
 
     setGravity(Gravity.CENTER);
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-      setTextAlignment(TEXT_ALIGNMENT_CENTER);
-    }
+    setTextAlignment(TEXT_ALIGNMENT_CENTER);
 
     setDay(day);
   }
@@ -125,7 +124,7 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
     if (drawable == null) {
       this.selectionDrawable = null;
     } else {
-      this.selectionDrawable = drawable.getConstantState().newDrawable(getResources());
+      this.selectionDrawable = Objects.requireNonNull(drawable.getConstantState()).newDrawable(getResources());
     }
     regenerateBackground();
   }
@@ -137,7 +136,7 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
     if (drawable == null) {
       this.customBackground = null;
     } else {
-      this.customBackground = drawable.getConstantState().newDrawable(getResources());
+      this.customBackground = Objects.requireNonNull(drawable.getConstantState()).newDrawable(getResources());
     }
     invalidate();
   }
@@ -205,23 +204,19 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
     if (selectionDrawable != null) {
       setBackground(selectionDrawable);
     } else {
-      mCircleDrawable = generateBackground(selectionColor, fadeTime, circleDrawableRect);
+      mCircleDrawable = generateBackground(selectionColor, fadeTime);
       setBackground(mCircleDrawable);
     }
   }
 
-  private static Drawable generateBackground(int color, int fadeTime, Rect bounds) {
+  private static Drawable generateBackground(int color, int fadeTime) {
     StateListDrawable drawable = new StateListDrawable();
     drawable.setExitFadeDuration(fadeTime);
     drawable.addState(new int[] { android.R.attr.state_checked }, generateCircleDrawable(color));
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      drawable.addState(
-          new int[] { android.R.attr.state_pressed },
-          generateRippleDrawable(color, bounds)
-      );
-    } else {
-      drawable.addState(new int[] { android.R.attr.state_pressed }, generateCircleDrawable(color));
-    }
+    drawable.addState(
+            new int[]{android.R.attr.state_pressed},
+            generateRippleDrawable(color)
+    );
 
     drawable.addState(new int[] { }, generateCircleDrawable(Color.TRANSPARENT));
 
@@ -234,23 +229,10 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
     return drawable;
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  private static Drawable generateRippleDrawable(final int color, Rect bounds) {
+  private static Drawable generateRippleDrawable(final int color) {
     ColorStateList list = ColorStateList.valueOf(color);
     Drawable mask = generateCircleDrawable(Color.WHITE);
-    RippleDrawable rippleDrawable = new RippleDrawable(list, null, mask);
-    //        API 21
-    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
-      rippleDrawable.setBounds(bounds);
-    }
-
-    //        API 22. Technically harmless to leave on for API 21 and 23, but not worth risking for 23+
-    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
-      int center = (bounds.left + bounds.right) / 2;
-      rippleDrawable.setHotspotBounds(center, bounds.top, center, bounds.bottom);
-    }
-
-    return rippleDrawable;
+    return new RippleDrawable(list, null, mask);
   }
 
   /**
@@ -289,17 +271,13 @@ import static you.thiago.materialcalendarview.MaterialCalendarView.showOutOfRang
   private void calculateBounds(int width, int height) {
     final int radius = Math.min(height, width);
     final int offset = Math.abs(height - width) / 2;
-
-    // Lollipop platform bug. Circle drawable offset needs to be half of normal offset
-    final int circleOffset =
-        Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ? offset / 2 : offset;
-
+    
     if (width >= height) {
       tempRect.set(offset, 0, radius + offset, height);
-      circleDrawableRect.set(circleOffset, 0, radius + circleOffset, height);
+      circleDrawableRect.set(offset, 0, radius + offset, height);
     } else {
       tempRect.set(0, offset, width, radius + offset);
-      circleDrawableRect.set(0, circleOffset, width, radius + circleOffset);
+      circleDrawableRect.set(0, offset, width, radius + offset);
     }
   }
 }

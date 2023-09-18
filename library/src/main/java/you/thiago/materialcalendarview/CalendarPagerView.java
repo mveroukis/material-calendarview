@@ -198,16 +198,14 @@ abstract class CalendarPagerView extends ViewGroup
 
   @Override
   public void onClick(final View v) {
-    if (v instanceof DayView) {
-      final DayView dayView = (DayView) v;
+    if (v instanceof final DayView dayView) {
       mcv.onDateClicked(dayView);
     }
   }
 
   @Override
   public boolean onLongClick(final View v) {
-    if (v instanceof DayView) {
-      final DayView dayView = (DayView) v;
+    if (v instanceof final DayView dayView) {
       mcv.onDateLongClicked(dayView);
       return true;
     }

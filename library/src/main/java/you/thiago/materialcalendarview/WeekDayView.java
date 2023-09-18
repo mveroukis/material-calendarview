@@ -2,12 +2,13 @@ package you.thiago.materialcalendarview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
+import android.view.Gravity;
+
+import java.time.DayOfWeek;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
-import android.view.Gravity;
 import you.thiago.materialcalendarview.format.WeekDayFormatter;
-import java.time.DayOfWeek;
 
 /**
  * Display a day of the week
@@ -22,9 +23,7 @@ import java.time.DayOfWeek;
 
     setGravity(Gravity.CENTER);
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-      setTextAlignment(TEXT_ALIGNMENT_CENTER);
-    }
+    setTextAlignment(TEXT_ALIGNMENT_CENTER);
 
     setDayOfWeek(dayOfWeek);
   }

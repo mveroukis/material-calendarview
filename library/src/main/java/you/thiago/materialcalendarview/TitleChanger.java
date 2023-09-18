@@ -93,13 +93,13 @@ class TitleChanger {
           .setListener(new AnimatorListener() {
 
             @Override
-            public void onAnimationCancel(Animator animator) {
+            public void onAnimationCancel(@NonNull Animator animator) {
               doTranslation(title, 0);
               title.setAlpha(1);
             }
 
             @Override
-            public void onAnimationEnd(Animator animator) {
+            public void onAnimationEnd(@NonNull Animator animator) {
               title.setText(newTitle);
               doTranslation(title, translation);
 

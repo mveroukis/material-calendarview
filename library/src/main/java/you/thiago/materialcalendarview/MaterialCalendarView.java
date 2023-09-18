@@ -1376,12 +1376,11 @@ public class MaterialCalendarView extends ViewGroup {
    */
   protected void onDateClicked(@NonNull CalendarDay date, boolean nowSelected) {
     switch (selectionMode) {
-      case SELECTION_MODE_MULTIPLE: {
+      case SELECTION_MODE_MULTIPLE -> {
         adapter.setDateSelected(date, nowSelected);
         dispatchOnDateSelected(date, nowSelected);
       }
-      break;
-      case SELECTION_MODE_RANGE: {
+      case SELECTION_MODE_RANGE -> {
         final List<CalendarDay> currentSelection = adapter.getSelectedDates();
 
         if (currentSelection.size() == 0) {
@@ -1411,14 +1410,11 @@ public class MaterialCalendarView extends ViewGroup {
           dispatchOnDateSelected(date, nowSelected);
         }
       }
-      break;
-      default:
-      case SELECTION_MODE_SINGLE: {
+      case SELECTION_MODE_SINGLE -> {
         adapter.clearSelections();
         adapter.setDateSelected(date, true);
         dispatchOnDateSelected(date, true);
       }
-      break;
     }
   }
 
@@ -1645,14 +1641,13 @@ public class MaterialCalendarView extends ViewGroup {
     int specMode = MeasureSpec.getMode(spec);
     int specSize = MeasureSpec.getSize(spec);
     switch (specMode) {
-      case MeasureSpec.EXACTLY: {
+      case MeasureSpec.EXACTLY -> {
         return specSize;
       }
-      case MeasureSpec.AT_MOST: {
+      case MeasureSpec.AT_MOST -> {
         return Math.min(size, specSize);
       }
-      case MeasureSpec.UNSPECIFIED:
-      default: {
+      default -> {
         return size;
       }
     }
@@ -1947,17 +1942,11 @@ public class MaterialCalendarView extends ViewGroup {
     showWeekDays = state.showWeekDays;
 
     // Recreate adapter
-    final CalendarPagerAdapter<?> newAdapter;
-    switch (calendarMode) {
-      case MONTHS:
-        newAdapter = new MonthPagerAdapter(this);
-        break;
-      case WEEKS:
-        newAdapter = new WeekPagerAdapter(this);
-        break;
-      default:
-        throw new IllegalArgumentException("Provided display mode which is not yet implemented");
-    }
+    final CalendarPagerAdapter<?> newAdapter = switch (calendarMode) {
+      case MONTHS -> new MonthPagerAdapter(this);
+      case WEEKS -> new WeekPagerAdapter(this);
+    };
+    
     if (adapter == null) {
       adapter = newAdapter;
     } else {
