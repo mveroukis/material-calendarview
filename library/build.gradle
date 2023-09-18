@@ -3,13 +3,9 @@ apply plugin: 'com.android.library'
 android {
   namespace "you.thiago.materialcalendarview"
 
-  compileSdkVersion rootProject.ext.sdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+  compileSdk rootProject.ext.sdkVersion
   
   defaultConfig {
-    // Required when setting minSdkVersion to 20 or lower
-    multiDexEnabled true
-
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.sdkVersion
   }
@@ -22,11 +18,8 @@ android {
   }
 
   compileOptions {
-    // Required flag to enable support for JSR-310 and other APIs
-    coreLibraryDesugaringEnabled true
-
-    sourceCompatibility JavaVersion.VERSION_11
-    targetCompatibility JavaVersion.VERSION_11
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 
   lintOptions {
@@ -35,8 +28,6 @@ android {
 }
 
 dependencies {
-  coreLibraryDesugaring rootProject.ext.coreDesugar
-
   implementation rootProject.ext.appCompat
   implementation rootProject.ext.annotations
 

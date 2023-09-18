@@ -5,13 +5,9 @@ plugins {
 android {
   namespace "you.thiago.materialcalendarview.sample"
 
-  compileSdkVersion rootProject.ext.sdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
-
+  compileSdk rootProject.ext.sdkVersion
+  
   defaultConfig {
-    // Required when setting minSdkVersion to 20 or lower
-    multiDexEnabled true
-
     applicationId "you.thiago.materialcalendarview.sample"
 
     minSdkVersion rootProject.ext.minSdkVersion
@@ -25,22 +21,25 @@ android {
   }
 
   compileOptions {
-    // Required flag to enable support for JSR-310 and other APIs
-    coreLibraryDesugaringEnabled true
-
-    sourceCompatibility JavaVersion.VERSION_11
-    targetCompatibility JavaVersion.VERSION_11
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 }
 
 dependencies {
   implementation project(':library')
 
-  coreLibraryDesugaring rootProject.ext.coreDesugar
-
   implementation rootProject.ext.appCompat
   implementation rootProject.ext.recyclerviewV7
   implementation rootProject.ext.butterknife
 
   annotationProcessor rootProject.ext.butterknifeCompiler
+}
+
+tasks.withType(JavaCompile).configureEach{
+  options.fork = true
+  options.forkOptions.jvmArgs +=[
+          '--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
+          '--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED',
+          '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED']
 }

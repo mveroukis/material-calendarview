@@ -1,20 +1,17 @@
 ext {
-  buildToolsVersion = "33.0.1"
-  minSdkVersion = 16
+  minSdkVersion = 28
   sdkVersion = 33
   versionCode = 1
-  versionName = "1.0.0"
+  versionName = "1.1.0"
 
-  annotations = 'androidx.annotation:annotation:1.0.0'
-  appCompat = 'androidx.appcompat:appcompat:1.0.0'
-  recyclerviewV7 = 'androidx.recyclerview:recyclerview:1.0.0'
+  annotations = 'androidx.annotation:annotation:1.7.0'
+  appCompat = 'androidx.appcompat:appcompat:1.6.1'
+  recyclerviewV7 = 'androidx.recyclerview:recyclerview:1.3.1'
 
-  coreDesugarVersion = '2.0.2'
-  butterKnifeVersion = '10.2.0'
+  butterKnifeVersion = '10.2.3'
   junitVersion = '4.11'
 
   // Other
-  coreDesugar = "com.android.tools:desugar_jdk_libs:$coreDesugarVersion"
   butterknife = "com.jakewharton:butterknife:$butterKnifeVersion"
   butterknifeCompiler = "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 

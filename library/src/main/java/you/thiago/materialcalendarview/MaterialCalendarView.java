@@ -6,15 +6,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.ArrayRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -27,22 +20,30 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import you.thiago.materialcalendarview.format.ArrayWeekDayFormatter;
-import you.thiago.materialcalendarview.format.DayFormatter;
-import you.thiago.materialcalendarview.format.MonthArrayTitleFormatter;
-import you.thiago.materialcalendarview.format.TitleFormatter;
-import you.thiago.materialcalendarview.format.WeekDayFormatter;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.WeekFields;
+
+import androidx.annotation.ArrayRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+import you.thiago.materialcalendarview.format.ArrayWeekDayFormatter;
+import you.thiago.materialcalendarview.format.DayFormatter;
+import you.thiago.materialcalendarview.format.MonthArrayTitleFormatter;
+import you.thiago.materialcalendarview.format.TitleFormatter;
+import you.thiago.materialcalendarview.format.WeekDayFormatter;
 
 /**
  * <p>
@@ -219,15 +220,8 @@ public class MaterialCalendarView extends ViewGroup {
   public MaterialCalendarView(Context context, AttributeSet attrs) {
     super(context, attrs);
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      //If we're on good Android versions, turn off clipping for cool effects
-      setClipToPadding(false);
-      setClipChildren(false);
-    } else {
-      //Old Android does not like _not_ clipping view pagers, we need to clip
-      setClipChildren(true);
-      setClipToPadding(true);
-    }
+    setClipToPadding(false);
+    setClipChildren(false);
 
     final LayoutInflater inflater =
         (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
@@ -730,7 +724,7 @@ public class MaterialCalendarView extends ViewGroup {
    * @param resourceId The text appearance resource id.
    */
   public void setHeaderTextAppearance(int resourceId) {
-    title.setTextAppearance(getContext(), resourceId);
+    title.setTextAppearance(resourceId);
   }
 
   /**
@@ -826,7 +820,6 @@ public class MaterialCalendarView extends ViewGroup {
   /**
    * Get the current first day of the month in month mode, or the first visible day of the
    * currently visible week.
-   *
    * For example, in week mode, if the week is July 29th, 2018 to August 4th, 2018,
    * this will return July 29th, 2018. If in month mode and the month is august, then this method
    * will return August 1st, 2018.
@@ -840,9 +833,7 @@ public class MaterialCalendarView extends ViewGroup {
 
   /**
    * Set the calendar to a specific month or week based on a date.
-   *
    * In month mode, the calendar will be set to the corresponding month.
-   *
    * In week mode, the calendar will be set to the corresponding week.
    *
    * @param calendar a Calendar set to a day to focus the calendar on. Null will do nothing
@@ -853,9 +844,7 @@ public class MaterialCalendarView extends ViewGroup {
 
   /**
    * Set the calendar to a specific month or week based on a date.
-   *
    * In month mode, the calendar will be set to the corresponding month.
-   *
    * In week mode, the calendar will be set to the corresponding week.
    *
    * @param day a CalendarDay to focus the calendar on. Null will do nothing
@@ -866,9 +855,7 @@ public class MaterialCalendarView extends ViewGroup {
 
   /**
    * Set the calendar to a specific month or week based on a date.
-   *
    * In month mode, the calendar will be set to the corresponding month.
-   *
    * In week mode, the calendar will be set to the corresponding week.
    *
    * @param day a CalendarDay to focus the calendar on. Null will do nothing
@@ -1200,11 +1187,7 @@ public class MaterialCalendarView extends ViewGroup {
   private static int getThemeAccentColor(Context context) {
     int colorAttr;
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      colorAttr = android.R.attr.colorAccent;
-    } else {
-      colorAttr = R.attr.colorAccent;
-    }
+    colorAttr = android.R.attr.colorAccent;
 
     TypedValue outValue = new TypedValue();
     context.getTheme().resolveAttribute(colorAttr, outValue, true);
@@ -1436,8 +1419,6 @@ public class MaterialCalendarView extends ViewGroup {
         dispatchOnDateSelected(date, true);
       }
       break;
-      case SELECTION_MODE_NONE:
-        break;
     }
   }
 
