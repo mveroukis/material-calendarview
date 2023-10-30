@@ -23,7 +23,7 @@ Step 2. Add the dependency
 
 ```groovy
 dependencies {
-  implementation 'com.github.thiago-you:material-calendarview:1.1.0'
+  implementation 'com.github.mveroukis:material-calendarview:1.2.0'
 }
 ```
 
