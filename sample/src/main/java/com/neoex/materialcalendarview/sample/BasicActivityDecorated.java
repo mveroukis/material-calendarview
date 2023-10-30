@@ -1,6 +1,7 @@
 package com.neoex.materialcalendarview.sample;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.neoex.materialcalendarview.sample.decorators.MySelectorDecorator;
 import com.neoex.materialcalendarview.sample.decorators.OneDayDecorator;
 import com.neoex.materialcalendarview.CalendarDay;
 import com.neoex.materialcalendarview.OnDateSelectedListener;
+import com.neoex.materialcalendarview.sample.decorators.WeekDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import java.time.Month;
 public class BasicActivityDecorated extends AppCompatActivity implements OnDateSelectedListener {
 
   private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+  private WeekDecorator weekDecorator;
 
   @BindView(R.id.calendarView)
   MaterialCalendarView widget;
@@ -37,11 +40,12 @@ public class BasicActivityDecorated extends AppCompatActivity implements OnDateS
     setContentView(R.layout.activity_basic);
     ButterKnife.bind(this);
 
+    weekDecorator = new WeekDecorator(new ColorDrawable(0x0F00FF00),0xFF000000);
+
     widget.setOnDateChangedListener(this);
     widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
 
     final LocalDate instance = LocalDate.now();
-    widget.setSelectedDate(instance);
 
     final LocalDate min = LocalDate.of(instance.getYear(), Month.JANUARY, 1);
     final LocalDate max = LocalDate.of(instance.getYear(), Month.DECEMBER, 31);
@@ -49,10 +53,13 @@ public class BasicActivityDecorated extends AppCompatActivity implements OnDateS
     widget.state().edit().setMinimumDate(min).setMaximumDate(max).commit();
 
     widget.addDecorators(
-        new MySelectorDecorator(this),
+//        new MySelectorDecorator(this),
         new HighlightWeekendsDecorator(),
-        oneDayDecorator
+        weekDecorator//,
+  //      oneDayDecorator
     );
+
+    widget.setSelectedDate(instance);
 
     new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
   }
@@ -64,6 +71,8 @@ public class BasicActivityDecorated extends AppCompatActivity implements OnDateS
       boolean selected) {
     //If you change a decorate, you need to invalidate decorators
     oneDayDecorator.setDate(date.getDate());
+    weekDecorator.setFromWeekDate(date);
+
     widget.invalidateDecorators();
   }
 
