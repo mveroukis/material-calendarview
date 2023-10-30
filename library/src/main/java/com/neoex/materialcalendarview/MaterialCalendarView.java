@@ -45,6 +45,8 @@ import com.neoex.materialcalendarview.format.MonthArrayTitleFormatter;
 import com.neoex.materialcalendarview.format.TitleFormatter;
 import com.neoex.materialcalendarview.format.WeekDayFormatter;
 
+import kotlinx.coroutines.intrinsics.CancellableKt;
+
 /**
  * <p>
  * This class is a calendar widget for displaying and selecting dates.
@@ -197,6 +199,7 @@ public class MaterialCalendarView extends ViewGroup {
   private CalendarDay maxDate = null;
 
   private OnDateSelectedListener listener;
+  private OnWeekChangedListener weekChangedListener;
   private OnDateLongClickListener longClickListener;
   private OnMonthChangedListener monthListener;
   private OnRangeSelectedListener rangeListener;
@@ -1297,6 +1300,10 @@ public class MaterialCalendarView extends ViewGroup {
     this.listener = listener;
   }
 
+  public void setOnWeekChangedListener(OnWeekChangedListener listener) {
+    this.weekChangedListener = listener;
+  }
+
   /**
    * Sets the listener to be notified upon long clicks on dates.
    *
@@ -1333,6 +1340,8 @@ public class MaterialCalendarView extends ViewGroup {
     title.setOnClickListener(listener);
   }
 
+  private CalendarDay priorWeekStartDate = null;
+
   /**
    * Dispatch date change events to a listener, if set
    *
@@ -1342,6 +1351,20 @@ public class MaterialCalendarView extends ViewGroup {
   protected void dispatchOnDateSelected(final CalendarDay day, final boolean selected) {
     if (listener != null) {
       listener.onDateSelected(MaterialCalendarView.this, day, selected);
+    }
+
+    final LocalDate ldate = day.getDate();
+    final int dayOfWeek = ldate.getDayOfWeek().ordinal();
+    final LocalDate firstDay = ldate.minusDays((dayOfWeek + 1) % 7);
+
+    if (priorWeekStartDate == null || !firstDay.equals(priorWeekStartDate.getDate())) {
+      if (weekChangedListener != null) {
+        LocalDate lastDay = firstDay.plusDays(7);
+
+        priorWeekStartDate = CalendarDay.from(firstDay);
+
+        weekChangedListener.onWeekChanged(MaterialCalendarView.this,CalendarDay.from(firstDay), CalendarDay.from(lastDay));
+      }
     }
   }
 

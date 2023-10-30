@@ -47,7 +47,7 @@ public class WeekDecorator implements DayViewDecorator  {
 
     public void setFromWeekDate(final LocalDate date) {
         final int dayOfWeek = date.getDayOfWeek().ordinal();
-        final LocalDate firstDay = date.minusDays(dayOfWeek + 1);
+        final LocalDate firstDay = date.minusDays((dayOfWeek + 1) % 7);
 
         list.clear();
 

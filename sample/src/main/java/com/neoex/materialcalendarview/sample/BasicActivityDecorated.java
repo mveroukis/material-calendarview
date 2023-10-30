@@ -4,11 +4,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.neoex.materialcalendarview.MaterialCalendarView;
+import com.neoex.materialcalendarview.OnWeekChangedListener;
 import com.neoex.materialcalendarview.sample.decorators.EventDecorator;
 import com.neoex.materialcalendarview.sample.decorators.HighlightWeekendsDecorator;
 import com.neoex.materialcalendarview.sample.decorators.MySelectorDecorator;
@@ -26,7 +29,7 @@ import java.time.Month;
 /**
  * Shows off the most basic usage
  */
-public class BasicActivityDecorated extends AppCompatActivity implements OnDateSelectedListener {
+public class BasicActivityDecorated extends AppCompatActivity implements OnDateSelectedListener, OnWeekChangedListener {
 
   private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
   private WeekDecorator weekDecorator;
@@ -43,6 +46,7 @@ public class BasicActivityDecorated extends AppCompatActivity implements OnDateS
     weekDecorator = new WeekDecorator(new ColorDrawable(0x0F00FF00),0xFF000000);
 
     widget.setOnDateChangedListener(this);
+    widget.setOnWeekChangedListener(this);
     widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
 
     final LocalDate instance = LocalDate.now();
@@ -74,6 +78,11 @@ public class BasicActivityDecorated extends AppCompatActivity implements OnDateS
     weekDecorator.setFromWeekDate(date);
 
     widget.invalidateDecorators();
+  }
+
+  @Override
+  public void onWeekChanged(@NonNull MaterialCalendarView widget, @NonNull CalendarDay firstDayOfWeek, @NonNull CalendarDay lastDayOfWeek) {
+    Log.i("Calendar", "Week selection changed: " + firstDayOfWeek.toString());
   }
 
   /**
