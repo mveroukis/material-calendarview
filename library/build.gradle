@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-  namespace "you.thiago.materialcalendarview"
+  namespace "com.neoex.materialcalendarview"
 
   compileSdk rootProject.ext.sdkVersion
   

@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-  namespace "you.thiago.materialcalendarview.sample"
+  namespace "com.neoex.materialcalendarview.sample"
 
   compileSdk rootProject.ext.sdkVersion
   
   defaultConfig {
-    applicationId "you.thiago.materialcalendarview.sample"
+    applicationId "com.neoex.materialcalendarview.sample"
 
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.sdkVersion

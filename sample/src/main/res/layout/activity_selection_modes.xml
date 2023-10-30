@@ -27,28 +27,28 @@
         android:text="Week Calendar Mode"
         />
 
-    <you.thiago.materialcalendarview.MaterialCalendarView
+    <com.neoex.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendar_view_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mcv_selectionMode="single"
         />
 
-    <you.thiago.materialcalendarview.MaterialCalendarView
+    <com.neoex.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendar_view_multi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mcv_selectionMode="multiple"
         />
 
-    <you.thiago.materialcalendarview.MaterialCalendarView
+    <com.neoex.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendar_view_range"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mcv_selectionMode="range"
         />
 
-    <you.thiago.materialcalendarview.MaterialCalendarView
+    <com.neoex.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendar_view_none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

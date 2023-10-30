@@ -37,7 +37,7 @@ dependencies {
 Example:
 
 ```xml
-<you.thiago.materialcalendarview.MaterialCalendarView
+<com.neoex.materialcalendarview.MaterialCalendarView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/calendarView"
     android:layout_width="match_parent"
