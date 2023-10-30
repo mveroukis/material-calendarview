@@ -1,10 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 project.ext {
   buildToolsVersion = "33.0.1"
-  minSdkVersion = 28
+  minSdkVersion = 26
   sdkVersion = 33
   versionCode = 1
-  versionName = "1.2.0"
+  versionName = "1.2.1"
 }
 
 wrapper {
